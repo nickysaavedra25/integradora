@@ -380,18 +380,8 @@
             </div>
             
      <div class="btn-container">
-    <button type="button" class="btn" id="ingresarBtn">Ingresar</button>
+    <button type="submit" class="btn">Ingresar</button>
 </div>
-
-<script>
-    document.getElementById('ingresarBtn').addEventListener('click', function() {
-        // Usa una ruta relativa desde la ubicación actual
-        window.location.href = './project/dist/index.html'; 
-        
-        // O si index.html está en la raíz del sitio:
-        // window.location.href = '/index.html';
-    });
-</script>
         </form>
         
         <div class="footer">
@@ -426,6 +416,16 @@
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
+                // Get form values
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                // Basic validation
+                if (!username || !password) {
+                    alert('Por favor, complete todos los campos');
+                    return;
+                }
+                
                 const btn = document.querySelector('.btn');
                 btn.textContent = 'Verificando...';
                 btn.disabled = true;
@@ -438,11 +438,8 @@
                     btn.style.background = 'linear-gradient(135deg, #00c853, #008f39)';
                     
                     setTimeout(() => {
-                        alert('Bienvenido a la Universidad Tecnológica de Huejotzingo');
-                        loginForm.reset();
-                        btn.textContent = 'Ingresar';
-                        btn.style.background = 'linear-gradient(135deg, #008f39, #006b2b)';
-                        btn.disabled = false;
+                        // Redirect to dashboard with login parameter
+                        window.location.href = 'index.html?from=login';
                     }, 1500);
                 }, 2000);
             });
