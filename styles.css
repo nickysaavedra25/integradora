@@ -327,6 +327,17 @@ button:hover {
     background-color: #f0fff4;
 }
 
+/* Upload section styles */
+.file-drop-area {
+    border: 2px dashed #cbd5e0;
+    transition: all 0.3s ease;
+}
+
+.file-drop-area.active {
+    border-color: #48bb78;
+    background-color: #f0fff4;
+}
+
 .document-card {
     transition: all 0.2s ease;
 }
