@@ -273,21 +273,34 @@ function getDocumentosContent() {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-5L12 5H5a2 2 0 00-2 2z"></path>
                 </svg>
                 <h1 class="text-xl font-medium text-gray-800">Documentos importantes</h1>
-                <button id="toggleUploadBtn" class="ml-auto px-4 py-2 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors">
-                    <i class="fas fa-plus mr-2"></i>Subir documento
-                </button>
             </div>
 
-            <!-- Upload Section (Initially Hidden) -->
-            <div id="uploadSection" class="hidden bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+            <!-- Upload Section -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Gestión de Documentos</h3>
+                    <button id="toggleUploadBtn" class="px-4 py-2 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Subir documento
+                    </button>
+                </div>
+                
+                <div id="uploadSection" class="hidden">
                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Subir nuevo documento</h3>
                 
                 <div id="fileDropArea" class="file-drop-area border-2 border-dashed rounded-lg p-8 text-center mb-4">
-                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                    <svg class="w-16 h-16 text-gray-400 mb-3 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
                     <p class="text-gray-600 mb-2">Arrastra y suelta tus archivos aquí</p>
                     <p class="text-sm text-gray-500 mb-4">o</p>
                     <label for="fileInput" class="cursor-pointer bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors">
-                        <i class="fas fa-folder-open mr-2"></i>Seleccionar archivos
+                        <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-5L12 5H5a2 2 0 00-2 2z"></path>
+                        </svg>
+                        Seleccionar archivos
                     </label>
                     <input id="fileInput" type="file" class="hidden" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.zip,.rar">
                 </div>
@@ -318,13 +331,21 @@ function getDocumentosContent() {
                 
                 <div class="flex space-x-3 mt-4">
                     <button id="uploadBtn" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                        <i class="fas fa-upload mr-2"></i>Subir documentos
+                        <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        Subir documentos
                     </button>
                     <button id="cancelUploadBtn" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors">
-                        <i class="fas fa-times mr-2"></i>Cancelar
+                        <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        Cancelar
                     </button>
                 </div>
+                </div>
             </div>
+            
             <!-- Documents List -->
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                 <div class="flex justify-between items-center mb-6">
@@ -340,7 +361,9 @@ function getDocumentosContent() {
                             <option value="otros">Otros</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                            <i class="fas fa-chevron-down text-xs"></i>
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -364,7 +387,9 @@ function getDocumentosContent() {
                 
                 <!-- Empty State -->
                 <div id="emptyDocuments" class="hidden text-center py-12">
-                    <i class="fas fa-folder-open text-4xl text-gray-300 mb-4"></i>
+                    <svg class="w-16 h-16 text-gray-300 mb-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-5L12 5H5a2 2 0 00-2 2z"></path>
+                    </svg>
                     <h4 class="text-lg font-medium text-gray-500">No hay documentos subidos</h4>
                     <p class="text-gray-400 mt-1">Sube tu primer documento para comenzar</p>
                 </div>
@@ -377,7 +402,9 @@ function getDocumentosContent() {
                 <div class="flex justify-between items-center mb-4">
                     <h3 id="previewDocumentTitle" class="text-lg font-medium text-gray-800">Vista previa del documento</h3>
                     <button id="closePreviewModal" class="text-gray-400 hover:text-gray-600">
-                        <i class="fas fa-times"></i>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </div>
                 </div>
                 <div id="previewContent" class="flex-1 overflow-auto border border-gray-200 rounded-md p-4 mb-4">
@@ -385,7 +412,10 @@ function getDocumentosContent() {
                 </div>
                 <div class="flex justify-end space-x-3">
                     <button id="downloadPreviewBtn" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
-                        <i class="fas fa-download mr-2"></i>Descargar
+                        <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                        </svg>
+                        Descargar
                     </button>
                     <button id="closePreviewBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors">
                         Cerrar
@@ -588,15 +618,17 @@ function setupDocumentManagement() {
     const closePreviewModal = document.getElementById('closePreviewModal');
     const closePreviewBtn = document.getElementById('closePreviewBtn');
     
+    if (!toggleUploadBtn) return; // Exit if elements don't exist
+    
     // Toggle upload section
     toggleUploadBtn.addEventListener('click', function() {
         const isHidden = uploadSection.classList.contains('hidden');
         if (isHidden) {
             uploadSection.classList.remove('hidden');
-            this.innerHTML = '<i class="fas fa-minus mr-2"></i>Ocultar subida';
+            this.innerHTML = '<svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>Ocultar subida';
         } else {
             uploadSection.classList.add('hidden');
-            this.innerHTML = '<i class="fas fa-plus mr-2"></i>Subir documento';
+            this.innerHTML = '<svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>Subir documento';
             resetUploadForm();
         }
     });
@@ -604,7 +636,7 @@ function setupDocumentManagement() {
     // Cancel upload
     cancelUploadBtn.addEventListener('click', function() {
         uploadSection.classList.add('hidden');
-        toggleUploadBtn.innerHTML = '<i class="fas fa-plus mr-2"></i>Subir documento';
+        toggleUploadBtn.innerHTML = '<svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>Subir documento';
         resetUploadForm();
     });
     
@@ -658,7 +690,9 @@ function setupDocumentManagement() {
             
             listItem.innerHTML = `
                 <div class="flex items-center">
-                    <i class="fas ${getFileIcon(file.name)} text-gray-500 mr-2"></i>
+                    <svg class="w-4 h-4 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
                     <span class="text-sm text-gray-700 truncate max-w-xs">${file.name}</span>
                 </div>
                 <span class="text-xs text-gray-500">${formatFileSize(file.size)}</span>
@@ -707,7 +741,7 @@ function setupDocumentManagement() {
         // Reset form and hide upload section
         resetUploadForm();
         uploadSection.classList.add('hidden');
-        toggleUploadBtn.innerHTML = '<i class="fas fa-plus mr-2"></i>Subir documento';
+        toggleUploadBtn.innerHTML = '<svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>Subir documento';
         
         // Update table
         renderDocumentsTable(filterDocuments.value);
