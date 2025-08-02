@@ -370,8 +370,8 @@
         
         <form id="loginForm">
             <div class="input-group">
-                <input type="text" id="username" required>
-                <label for="username">Usuario</label>
+                <input type="text" id="correo" required>
+                <label for="correo">Correo</label>
             </div>
             
             <div class="input-group">
@@ -389,123 +389,7 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Crear cuadrícula de fondo interactiva
-            const bgAnimation = document.getElementById('bgAnimation');
-            const squares = 20 * 20;
-            
-            for (let i = 0; i < squares; i++) {
-                const square = document.createElement('div');
-                square.classList.add('bg-square');
-                bgAnimation.appendChild(square);
-                
-                square.addEventListener('mouseover', () => {
-                    square.style.transition = '0s';
-                    square.style.backgroundColor = 'rgba(0, 143, 57, 0.8)';
-                });
-                
-                square.addEventListener('mouseout', () => {
-                    square.style.transition = '2s ease';
-                    square.style.backgroundColor = 'rgba(0, 20, 5, 0.1)';
-                });
-            }
-            
-            // Efecto de confeti al enviar el formulario
-            const loginForm = document.getElementById('loginForm');
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Get form values
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                
-                // Basic validation
-                if (!username || !password) {
-                    alert('Por favor, complete todos los campos');
-                    return;
-                }
-                
-                const btn = document.querySelector('.btn');
-                btn.textContent = 'Verificando...';
-                btn.disabled = true;
-                
-                // Crear confeti
-                createConfetti();
-                
-                setTimeout(() => {
-                    btn.textContent = 'Acceso concedido ✓';
-                    btn.style.background = 'linear-gradient(135deg, #00c853, #008f39)';
-                    
-                    setTimeout(() => {
-                        // Redirect to dashboard with login parameter
-                        window.location.href = './index.html?from=login';
-                    }, 1500);
-                }, 2000);
-            });
-            
-            function createConfetti() {
-                const colors = ['#008f39', '#006b2b', '#004d20', '#ffffff'];
-                const container = document.querySelector('.login-container');
-                
-                for (let i = 0; i < 100; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.classList.add('confetti');
-                    
-                    // Posición y estilo aleatorio
-                    const size = Math.random() * 10 + 5;
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    const left = Math.random() * 100;
-                    const animationDuration = Math.random() * 3 + 2;
-                    const delay = Math.random() * 2;
-                    
-                    confetti.style.width = `${size}px`;
-                    confetti.style.height = `${size}px`;
-                    confetti.style.backgroundColor = color;
-                    confetti.style.left = `${left}%`;
-                    confetti.style.bottom = '0';
-                    confetti.style.opacity = '1';
-                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    confetti.style.animation = `confettiFall ${animationDuration}s ease-in ${delay}s forwards`;
-                    
-                    // Animación de caída
-                    const keyframes = `
-                        @keyframes confettiFall {
-                            to {
-                                transform: translateY(-200px) rotate(360deg);
-                                opacity: 0;
-                            }
-                        }
-                    `;
-                    
-                    const style = document.createElement('style');
-                    style.innerHTML = keyframes;
-                    document.head.appendChild(style);
-                    
-                    container.appendChild(confetti);
-                    
-                    // Eliminar después de la animación
-                    setTimeout(() => {
-                        confetti.remove();
-                        style.remove();
-                    }, (animationDuration + delay) * 1000);
-                }
-            }
-            
-            // Efecto 3D al mover el mouse
-            const loginContainer = document.querySelector('.login-container');
-            document.addEventListener('mousemove', (e) => {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-                loginContainer.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-            });
-            
-            // Resetear cuando el mouse sale
-            loginContainer.addEventListener('mouseleave', () => {
-                loginContainer.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
-            });
-        });
-    </script>
+<script src="./Apis/sesion.js"></script>
+
 </body>
 </html>
