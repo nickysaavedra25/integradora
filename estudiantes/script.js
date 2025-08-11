@@ -19,6 +19,26 @@ const navBtns = document.querySelectorAll('.nav-btn');
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
+    // Check if user is authenticated
+    const token = localStorage.getItem('token');
+    const tipoUsuario = localStorage.getItem('tipo_usuario');
+    
+    if (!token) {
+        // No token found, redirect to login
+        window.location.href = '../login-uth.html';
+        return;
+    }
+    
+    if (tipoUsuario && tipoUsuario !== 'estudiante') {
+        // Wrong user type, redirect to appropriate dashboard
+        if (tipoUsuario === 'docente') {
+            window.location.href = '../docente/inicio.html';
+        } else if (tipoUsuario === 'admin') {
+            window.location.href = '../administracion/index.html';
+        }
+        return;
+    }
+    
     // Check if user is coming from login
     const urlParams = new URLSearchParams(window.location.search);
     const fromLogin = urlParams.get('from') === 'login';
@@ -30,6 +50,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load initial content
     loadContent(activeSection);
+    
+    // Update user name if available
+    const userName = localStorage.getItem('nombre');
+    if (userName) {
+        const userNameElement = document.getElementById('userName');
+        if (userNameElement) {
+            userNameElement.textContent = userName;
+        }
+    }
     
     // Set up event listeners
     setupEventListeners();
@@ -560,11 +589,79 @@ function viewDocument(docType) {
 function handleLogout() {
     setLogoutModalOpen(false);
     
-    // Show logout message
-    alert('Sesión cerrada exitosamente');
+    // Clear any stored session data
+    localStorage.removeItem('token');
+    localStorage.removeItem('idU');
+    localStorage.removeItem('tipo_usuario');
+    localStorage.removeItem('nombre');
     
-    // Redirect to login page
-    window.location.href = 'login-uth.html';
+    // Show logout message
+    showNotification('Cerrando sesión...', 'info');
+    
+    setTimeout(() => {
+        // Redirect to login page
+        window.location.href = '../login-uth.html';
+    }, 1000);
+}
+
+// Notification system
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: ${getNotificationColor(type)};
+        color: ${type === 'warning' ? '#212529' : 'white'};
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        z-index: 9999;
+        max-width: 350px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        font-weight: 500;
+        border-left: 4px solid ${getNotificationBorderColor(type)};
+    `;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after 4 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 4000);
+}
+
+function getNotificationColor(type) {
+    switch(type) {
+        case 'success': return '#10b981';
+        case 'warning': return '#f59e0b';
+        case 'error': return '#ef4444';
+        case 'info':
+        default: return '#3b82f6';
+    }
+}
+
+function getNotificationBorderColor(type) {
+    switch(type) {
+        case 'success': return '#059669';
+        case 'warning': return '#d97706';
+        case 'error': return '#dc2626';
+        case 'info':
+        default: return '#2563eb';
+    }
 }
 
 // Document Management System
