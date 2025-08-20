@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else if (tipo_usuario === "admin") {
                         window.location.href = "../administracion/index.html";
                     } else {
-                        window.location.href = "../estudiantes/index.html";
+                        window.location.href = "./estudiantes/index.html";
                     }
                 }, 1500);
             } else {

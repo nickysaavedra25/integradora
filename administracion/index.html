@@ -304,6 +304,12 @@ if (menuToggle && sidebar) {
     }
     if (confirmLogout) {
         confirmLogout.addEventListener('click', function() {
+            // Clear session data
+            localStorage.removeItem('token');
+            localStorage.removeItem('idU');
+            localStorage.removeItem('tipo_usuario');
+            localStorage.removeItem('nombre');
+            
             window.location.href = '../login-uth.html';
         }); 
     }

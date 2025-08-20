@@ -146,6 +146,12 @@ function setLogoutModalOpen(open) {
 function handleLogout() {
     setLogoutModalOpen(false);
     
+    // Clear session data
+    localStorage.removeItem('token');
+    localStorage.removeItem('idU');
+    localStorage.removeItem('tipo_usuario');
+    localStorage.removeItem('nombre');
+    
     // Show logout message
     showNotification('Cerrando sesión...', 'info');
     
