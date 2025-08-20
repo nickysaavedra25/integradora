@@ -43,13 +43,12 @@
             <!-- User Profile -->
             <div class="p-6 text-center border-b border-green-700">
                 <div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-3 overflow-hidden">
-                    <img src="../img/images.png" alt="Administrador" class="w-full h-full object-cover">
+                    <img id="sidebar-avatar" src="../img/images.png" alt="Administrador" class="w-full h-full object-cover">
                 </div>
-                <h3 class="font-semibold text-sm">Alejandro Ramírez</h3>
-                <p class="text-xs text-green-200 mb-2">Director de carrera</p>
-                <p class="text-xs text-green-200">TIC'S</p>
+                <h3 id="nombre-usuario"class="font-semibold text-sm"></h3>
+                <p id="rol-usuario" class="text-xs text-green-200 mb-2"></p>
             
-            </div>
+            </div> 
 
             <!-- Navigation Menu -->
             <nav class="flex-1 py-4">
@@ -94,10 +93,8 @@
                         </button>
                         <img src="../img/images.png" alt="UTN Logo" class="h-8 w-auto">
                     </div>
-
-                    <!-- Right side buttons -->
                     <div class="flex space-x-3">
-                        <!-- Notifications Button -->
+                        <!-- Notificaciones -->
                         <div class="relative">
                             <button id="notificationsBtn" class="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors relative">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,7 +103,7 @@
                                 <span id="notificationBadge" class="notification-badge">0</span>
                             </button>
                         </div>
-                        <!-- Logout Button -->
+                        <!-- Cerrar sesion-->
                         <button id="logoutBtn" class="flex items-center px-3 py-2 bg-red-500 text-white text-sm rounded hover:bg-red-600 transition-colors">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
@@ -137,10 +134,8 @@
                             <i class="fas fa-user-graduate text-blue-600 text-xl mr-3"></i>
                             <h3 class="text-lg font-medium text-gray-700">Estudiantes activos</h3>
                         </div>
-                        <p class="text-4xl font-bold text-gray-900 mb-2">42</p>
-                        <p class="text-gray-500 text-sm flex items-center">
-                            <i class="fas fa-spinner mr-1 text-gray-400"></i> 15 en proceso
-                        </p>
+                        <p id="total-alumnos" class="text-4xl font-bold text-gray-900 mb-2"></p>
+                        <p class="text-gray-500 text-sm flex items-center"></p>
                     </div>
 
                     <div class="bg-white shadow rounded-lg p-6 flex flex-col items-start">
@@ -148,7 +143,7 @@
                             <i class="fas fa-building text-purple-600 text-xl mr-3"></i>
                             <h3 class="text-lg font-medium text-gray-700">Empresas participantes</h3>
                         </div>
-                        <p class="text-4xl font-bold text-gray-900 mb-2">28</p>
+                        <p id="contarEmpresas" class="text-4xl font-bold text-gray-900 mb-2"></p>
                         <p class="text-orange-500 text-sm flex items-center">
                             <i class="fas fa-plus-circle mr-1"></i> 3 nuevas
                         </p>
@@ -310,10 +305,13 @@ if (menuToggle && sidebar) {
     if (confirmLogout) {
         confirmLogout.addEventListener('click', function() {
             window.location.href = '../login-uth.html';
-        });
+        }); 
     }
 });
 </script>
-<script src="../Apis/contarEstadias.js"></script>
+<script src="../Apis/Administracion/index/contarEstadias.js"></script>
+<scrip src="../Apis/Administracion/index/mostrarNombre.js"></script>
+<script src="../Apis/Administracion/index/estudiantesActivos.js"></script>
+<script src="../Apis/Administracion/index/empresas.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+
+/*Solicitudes de estadias */
 const apiUrl = "http://127.0.0.1:8000"; // URL base de la API
 const token = localStorage.getItem('token');// Obtener el token almacenado en el navegador (localStorage)
 
@@ -31,3 +33,5 @@ const token = localStorage.getItem('token');// Obtener el token almacenado en el
             alert("Ocurrió un error inesperado. Intenta más tarde.");
         });
     }
+    
+ 

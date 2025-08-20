@@ -28,9 +28,8 @@
                 <div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-3 overflow-hidden">
                     <img src="../img/images.png" alt="Administrador" class="w-full h-full object-cover">
                 </div>
-                <h3 class="font-semibold text-sm">Alejandro Ramírez</h3>
-                <p class="text-xs text-green-200 mb-2">Director de carrera</p>
-                <p class="text-xs text-green-200">TIC'S</p>
+               <h3 id="nombre-usuario" class="font-semibold text-sm"></h3>
+                <p id="rol-usuario" class="text-xs text-green-200 mb-2"></p>
             </div>
            <nav class="flex-1 py-4">
                 <ul class="space-y-1">
@@ -110,48 +109,38 @@
             <div id="mainContent" class="flex-1 p-8 bg-gray-50 overflow-y-auto">
                 <h2 class="text-xl font-semibold text-gray-800 mb-6">Reportes</h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center space-x-4">
-                        <div class="p-3 bg-blue-100 rounded-full text-blue-600">
-                            <i class="fas fa-users text-2xl"></i>
+                <!-- Centrar el primer grid -->
+                <div class="w-full flex justify-center mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
+                        <!-- Card Estudiantes Activos -->
+                        <div class="bg-white rounded-lg shadow-md p-6 flex items-center space-x-4">
+                            <div class="p-3 bg-blue-100 rounded-full text-blue-600">
+                                <i class="fas fa-users text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-lg font-semibold text-gray-800">Estudiantes Activos</p>
+                                <p id="total-estudiantes" class="text-4xl font-bold text-gray-800"></p>
+                                <p class="text-sm text-green-600 flex items-center"></p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-lg font-semibold text-gray-800">Estudiantes Activos</p>
-                            <p class="text-4xl font-bold text-gray-800">142</p>
-                            <p class="text-sm text-green-600 flex items-center">
-                                <i class="fas fa-arrow-up mr-1 text-green-500"></i> 12% desde el mes pasado
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center space-x-4">
-                        <div class="p-3 bg-green-100 rounded-full text-green-600">
-                            <i class="fas fa-briefcase text-2xl"></i>
-                        </div>
-                        <div>
-                            <p class="text-lg font-semibold text-gray-800">Empresas Participantes</p>
-                            <p class="text-4xl font-bold text-gray-800">36</p>
-                            <p class="text-sm text-green-600 flex items-center">
-                                <i class="fas fa-plus mr-1 text-green-500"></i> 3 nuevas empresas
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center space-x-4">
-                        <div class="p-3 bg-yellow-100 rounded-full text-yellow-600">
-                            <i class="fas fa-file-alt text-2xl"></i>
-                        </div>
-                        <div>
-                            <p class="text-lg font-semibold text-gray-800">Reportes Generados</p>
-                            <p class="text-4xl font-bold text-gray-800">84</p>
-                            <p class="text-sm text-green-600 flex items-center">
-                                <i class="fas fa-arrow-up mr-1 text-green-500"></i> 15 este mes
-                            </p>
+                        <!-- Card Empresas Participantes -->
+                        <div class="bg-white rounded-lg shadow-md p-6 flex items-center space-x-4">
+                            <div class="p-3 bg-green-100 rounded-full text-green-600">
+                                <i class="fas fa-briefcase text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-lg font-semibold text-gray-800">Empresas Participantes</p>
+                                <p id="total-empresas" class="text-4xl font-bold text-gray-900 mb-2"></p>
+                                <p class="text-sm text-green-600 flex items-center">
+                                    <i class="fas fa-plus mr-1 text-green-500"></i> 3 nuevas empresas
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Centrar el segundo grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center max-w-6xl mx-auto">
                     <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-2">
@@ -213,7 +202,7 @@
                                 <span class="bg-red-100 text-red-700 px-2 py-0.5 text-xs rounded-full font-semibold">Urgente</span>
                             </div>
                             <p class="text-sm text-gray-600 mb-4">
-                                Listado de estudiantes con documentos pendientes de entrega o revisión. Incluye tipo
+                                     Listado de estudiantes con documentos pendientes de entrega o revisión. Incluye tipo
                                 de documento, fecha límite y estado actual.
                             </p>
                             <div class="text-sm text-gray-700 mb-2">
