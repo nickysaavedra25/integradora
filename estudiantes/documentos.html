@@ -828,12 +828,13 @@
         <!-- User Profile -->
         <div class="user-info">
             <div class="user-avatar">
-                <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" 
-                     alt="Carlos Martinez Gomez">
+                <img src="../img/image.png" 
+                     alt="Foto de perfil">
             </div>
-            <h3 class="user-name">Carlos Martínez Gómez</h3>
+            <h3 id="userName" class="font-semibold text-sm"></h3>
+            <p id="userEmail" class="text-xs text-green-200"></p>
+            <p id="userPhone" class="text-xs text-green-200"></p>
             <p class="user-details">9° Cuatrimestre</p>
-            <p class="user-details">Semestre: Ene - Abr 2023</p>
             <p class="user-details">Ing. Desarrollo y Gestión de Software</p>
             <p class="user-details">Grupo: B</p>
         </div>
@@ -845,12 +846,6 @@
                     <button class="nav-btn" data-section="inicio">
                         <i class="fas fa-home nav-icon"></i>
                         <span class="sidebar-text">Inicio</span>
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-btn" data-section="mi-estadia">
-                        <i class="fas fa-user-graduate nav-icon"></i>
-                        <span class="sidebar-text">Mi Estadía</span>
                     </button>
                 </li>
                 <li class="nav-item">
@@ -942,10 +937,9 @@
                                     <label for="documentType" class="form-label">Tipo de documento:</label>
                                     <select id="documentType" class="form-select">
                                         <option value="">Selecciona un tipo</option>
-                                        <option value="carta_presentacion">Carta de Presentación</option>
-                                        <option value="plan_trabajo">Plan de Trabajo</option>
-                                        <option value="informe_parcial">Informe Parcial</option>
-                                        <option value="informe_final">Informe Final</option>
+                                        <option value="carta_aceptacion">Carta de Aceptación </option>
+                                        <option value="memoria_estadia">Memoria de Estadía</option>
+                                        <option value="cronograma">Cronograma</option>
                                         <option value="evaluacion">Evaluación</option>
                                         <option value="otros">Otros</option>
                                     </select>
@@ -978,11 +972,10 @@
                             <div class="filter-select">
                                 <select id="filterDocuments">
                                     <option value="all">Todos los documentos</option>
-                                    <option value="carta_presentacion">Cartas de Presentación</option>
-                                    <option value="plan_trabajo">Planes de Trabajo</option>
-                                    <option value="informe_parcial">Informes Parciales</option>
-                                    <option value="informe_final">Informes Finales</option>
-                                    <option value="evaluacion">Evaluaciones</option>
+                                    <option value="carta_aceptacion">Carta de Aceptación </option>
+                                    <option value="memoria_estadia">Memoria de Estadía</option>
+                                    <option value="cronograma">Cronograma</option>
+                                    <option value="evaluacion">Evaluación</option>
                                     <option value="otros">Otros</option>
                                 </select>
                             </div>
@@ -1095,134 +1088,6 @@
                     </div>
                 `
             },
-            {
-                id: 2,
-                name: 'Plan de Trabajo.docx',
-                type: 'plan_trabajo',
-                status: 'Pendiente',
-                date: '2023-05-20',
-                size: '1.8 MB',
-                description: 'Plan de trabajo para el proyecto ABC',
-                previewContent: `
-                    <div class="preview-container">
-                        <div class="preview-header">
-                            <h3 class="preview-title">Plan de Trabajo</h3>
-                        </div>
-                        <div class="preview-content">
-                            <div class="preview-meta">
-                                <div class="preview-meta-item">
-                                    <span class="preview-meta-label">Tipo:</span>
-                                    <span class="preview-meta-value">Plan de Trabajo</span>
-                                </div>
-                                <div class="preview-meta-item">
-                                    <span class="preview-meta-label">Estado:</span>
-                                    <span class="preview-meta-value"><span class="badge badge-yellow">Pendiente</span></span>
-                                </div>
-                                <div class="preview-meta-item">
-                                    <span class="preview-meta-label">Fecha:</span>
-                                    <span class="preview-meta-value">20 de mayo de 2023</span>
-                                </div>
-                                <div class="preview-meta-item">
-                                    <span class="preview-meta-label">Descripción:</span>
-                                    <span class="preview-meta-value">Plan de trabajo para el proyecto ABC</span>
-                                </div>
-                            </div>
-                            <div class="preview-text">
-                                <h4>Objetivos del Proyecto</h4>
-                                <ul>
-                                    <li>Desarrollar un sistema de gestión de inventarios para la empresa XYZ</li>
-                                    <li>Implementar una base de datos relacional para el almacenamiento de información</li>
-                                    <li>Crear una interfaz de usuario intuitiva para los empleados</li>
-                                    <li>Capacitar al personal en el uso del sistema</li>
-                                </ul>
-                                
-                                <h4>Actividades Programadas</h4>
-                                <ol>
-                                    <li>Análisis de requerimientos (Semana 1-2)</li>
-                                    <li>Diseño de la base de datos (Semana 3)</li>
-                                    <li>Desarrollo del backend (Semana 4-6)</li>
-                                    <li>Desarrollo del frontend (Semana 7-9)</li>
-                                    <li>Pruebas y ajustes (Semana 10-11)</li>
-                                    <li>Implementación y capacitación (Semana 12)</li>
-                                </ol>
-                                
-                                <h4>Entregables</h4>
-                                <ul>
-                                    <li>Documento de especificaciones técnicas</li>
-                                    <li>Diagrama de la base de datos</li>
-                                    <li>Código fuente del sistema</li>
-                                    <li>Manual de usuario</li>
-                                    <li>Informe final</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            {
-                id: 3,
-                name: 'Informe Parcial 1.pdf',
-                type: 'informe_parcial',
-                status: 'Rechazado',
-                date: '2023-06-10',
-                size: '3.2 MB',
-                description: 'Primer informe parcial de actividades',
-                previewContent: `
-                    <div class="preview-container">
-                        <div class="preview-header">
-                            <h3 class="preview-title">Informe Parcial #1</h3>
-                        </div>
-                        <div class="preview-content">
-                            <div class="preview-meta">
-                                <div class="preview-meta-item">
-                                    <span class="preview-meta-label">Tipo:</span>
-                                    <span class="preview-meta-value">Informe Parcial</span>
-                                </div>
-                                <div class="preview-meta-item">
-                                    <span class="preview-meta-label">Estado:</span>
-                                    <span class="preview-meta-value"><span class="badge badge-red">Rechazado</span></span>
-                                </div>
-                                <div class="preview-meta-item">
-                                    <span class="preview-meta-label">Fecha:</span>
-                                    <span class="preview-meta-value">10 de junio de 2023</span>
-                                </div>
-                                <div class="preview-meta-item">
-                                    <span class="preview-meta-label">Descripción:</span>
-                                    <span class="preview-meta-value">Primer informe parcial de actividades</span>
-                                </div>
-                            </div>
-                            <div class="preview-text">
-                                <div style="color: #ef4444; background-color: #fee2e2; padding: 1rem; border-radius: 0.375rem; margin-bottom: 1rem;">
-                                    <p><strong>Observaciones del coordinador:</strong></p>
-                                    <p>El informe no cumple con los requisitos solicitados. Faltan evidencias fotográficas de las actividades realizadas y el formato no es el establecido en la guía de estadías. Por favor, revisar el documento y volver a enviar.</p>
-                                </div>
-                                
-                                <h4>Actividades Realizadas</h4>
-                                <p>Durante las primeras 4 semanas de estadía se realizaron las siguientes actividades:</p>
-                                <ul>
-                                    <li>Reunión inicial con el supervisor de la empresa</li>
-                                    <li>Recopilación de requerimientos del sistema</li>
-                                    <li>Investigación sobre tecnologías a utilizar</li>
-                                    <li>Configuración del entorno de desarrollo</li>
-                                </ul>
-                                
-                                <h4>Problemas Encontrados</h4>
-                                <ul>
-                                    <li>Dificultad para acceder a cierta información de la empresa</li>
-                                    <li>Cambios en los requerimientos iniciales</li>
-                                </ul>
-                                
-                                <h4>Próximas Actividades</h4>
-                                <ul>
-                                    <li>Diseño del modelo de datos</li>
-                                    <li>Creación de prototipos de interfaz</li>
-                                    <li>Desarrollo de módulos básicos</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                `
-            }
         ];
 
         // DOM elements
@@ -1546,10 +1411,9 @@
 
         function getTypeName(type) {
             const types = {
-                'carta_presentacion': 'Carta Presentación',
-                'plan_trabajo': 'Plan Trabajo',
-                'informe_parcial': 'Informe Parcial',
-                'informe_final': 'Informe Final',
+                'carta_aceptacion': 'Carta de Aceptación',
+                'plan_memoria_estadiatrabajo': 'Memoria de Estadía',
+                'cronograma': 'Cronograma',
                 'evaluacion': 'Evaluación',
                 'otros': 'Otros'
             };
@@ -1558,10 +1422,9 @@
 
         function getTypeBadgeClass(type) {
             const classes = {
-                'carta_presentacion': 'badge-blue',
-                'plan_trabajo': 'badge-purple',
-                'informe_parcial': 'badge-yellow',
-                'informe_final': 'badge-green',
+                'carta_aceptacion': 'badge-blue',
+                'memoria_estadia': 'badge-purple',
+                'cronograma': 'badge-yellow',
                 'evaluacion': 'badge-red',
                 'otros': 'badge-gray'
             };
