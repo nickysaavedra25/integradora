@@ -24,7 +24,7 @@
             <!-- User Profile -->
             <div class="p-6 text-center border-b border-green-700">
                 <div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-3 overflow-hidden">
-                    <img src="../img/images.png" alt="Administrador" class="w-full h-full object-cover">
+                    <img src="../img/image.png" alt="Administrador" class="w-full h-full object-cover">
                 </div>
                 <h3 id="nombre-usuario" class="font-semibold text-sm"></h3>
                 <p id="rol-usuario" class="text-xs text-green-200 mb-2"></p>
@@ -126,13 +126,9 @@
                         </div>
                         <h3 class="text-lg font-semibold text-gray-800 mb-1">Carta de aceptación</h3>
                         <p class="text-sm text-gray-600 mb-4">Pendientes de revisión</p>
-                        <p  id="listarTodas" class="text-4xl font-bold text-green-600 mb-4"></p>
-                        <ul class="text-sm text-gray-700 space-y-2 w-full mb-4">
-                            <li class="flex justify-between w-full"><span>Jorge Luis Sánchez Cruz</span><span class="text-gray-500">5 días</span></li>
-                            <li class="flex justify-between w-full"><span>Fernanda Jiménez Ortiz</span><span class="text-gray-500">12 días</span></li>
-                            <li class="flex justify-between w-full"><span>Ricardo Morales Vargas</span><span class="text-gray-500">3 días</span></li>
-                            <li class="flex justify-between w-full"><span>Lucía Ramírez Castillo</span><span class="text-gray-500">18 días</span></li>
-                        </ul>
+                        <p  id="total_cartasAcep" class="text-4xl font-bold text-green-600 mb-4"></p>
+                        <ul id="listaCartasAcepLista" class="text-sm text-gray-700 space-y-2 w-full mb-4"></ul>
+                       
                         <div class="flex space-x-3 w-full justify-center">
                             <button class="px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded hover:bg-gray-300 transition-colors">Detalles</button>
                             <button class="px-4 py-2 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors"><i class="fas fa-check-circle mr-2"></i> Verificar</button>
@@ -145,11 +141,8 @@
                         </div>
                         <h3 class="text-lg font-semibold text-gray-800 mb-1">Cartas de terminación</h3>
                         <p class="text-sm text-gray-600 mb-4">Pendientes de revisión</p>
-                        <p class="text-4xl font-bold text-red-600 mb-4">2</p>
-                        <ul class="text-sm text-gray-700 space-y-2 w-full mb-4">
-                            <li class="flex justify-between w-full"><span>David Torres Méndez</span><span class="text-gray-500">10 días</span></li>
-                            <li class="flex justify-between w-full"><span>Valeria García Ruiz</span><span class="text-gray-500">7 días</span></li>
-                        </ul>
+                        <p id="total_cartas" class="text-4xl font-bold text-red-600 mb-4"></p>
+                        <ul id="listaCartasTerLista" class="text-sm text-gray-700 space-y-2 w-full mb-4"></ul>
                         <div class="flex space-x-3 w-full justify-center">
                             <button class="px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded hover:bg-gray-300 transition-colors">Detalles</button>
                             <button class="px-4 py-2 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors"><i class="fas fa-check-circle mr-2"></i> Verificar</button>
@@ -167,7 +160,7 @@
                                 <i class="fas fa-file-alt text-blue-600 text-lg"></i>
                             </div>
                             <div>
-                                <p class="text-2xl font-bold text-gray-800">24</p>
+                                <p   id="total_pendientes" class="text-2xl font-bold text-gray-800"></p>
                                 <p class="text-sm text-gray-600">Documentos pendientes</p>
                             </div>
                         </div>
@@ -176,7 +169,7 @@
                                 <i class="fas fa-check-circle text-green-600 text-lg"></i>
                             </div>
                             <div>
-                                <p class="text-2xl font-bold text-gray-800">142</p>
+                                <p  id="total_veri" class="text-2xl font-bold text-gray-800"></p>
                                 <p class="text-sm text-gray-600">Documentos verificados</p>
                             </div>
                         </div>
@@ -185,7 +178,7 @@
                                 <i class="fas fa-exclamation-circle text-red-600 text-lg"></i>
                             </div>
                             <div>
-                                <p class="text-2xl font-bold text-gray-800">10</p>
+                                <p id="total_urgen"   class="text-2xl font-bold text-gray-800"></p>
                                 <p class="text-sm text-gray-600">Documentos urgentes</p>
                             </div>
                         </div>
@@ -283,7 +276,10 @@ if (menuToggle && sidebar) {
 </script>
 <script src="../Apis/Administracion/alertas/estudiantesActivos.js"></script>
 <script src="../Apis/Administracion/alertas/carPresentacion.js"></script>
-<script src="../Apis/Administracion/alertas/cartaAceptacion.js"></script>
-<script src="../Apis/Administracion/alertas/cartaTerminacion.js"></script>
+<script src="../Apis/Administracion/alertas/carAceptacion.js"></script>
+<script src="../Apis/Administracion/alertas/carTerminacion.js"></script>
+<script src="../Apis/Administracion/alertas/docPendientes.js"></script>
+<script src="../Apis/Administracion/alertas/docVerificados.js"></script>
+<script src="../Apis/Administracion/alertas/docUrgentes.js"></script>
 </body>
 </html>

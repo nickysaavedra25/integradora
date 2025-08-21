@@ -1,5 +1,5 @@
-//const apiUrl = "http://127.0.0.1:8000";
-//const token = localStorage.getItem('token');
+const apiUrl = "http://127.0.0.1:8000";
+const token = localStorage.getItem('token');
 const idU = localStorage.getItem('idU');
 
 if (!token) {
@@ -11,16 +11,15 @@ if (!token) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ token, idU }) // Enviamos el token y el id del usuario,
+        body: JSON.stringify({ id: Number(idU) }) // Solo envía el id como número
     })
     .then(response => response.json())
     .then(data => {
-        if (data.usuario!== undefined) {
-           
-         document.getElementById("usuario").textContent = data.usuario.nombre + data.usuario.apellido_paterno + data.usuario.apellido_materno; // Mostrar el nombre completo del usuario
-         document.getElementById("rol-usuario").textContent = data.usuario.tipo_usuario; // Mostrar el tipo de usuario
+        if (data.usuario !== undefined) {
+            // Pinta el nombre completo y el rol en los elementos correctos
+            document.getElementById("nombre-usuario").textContent = `${data.usuario.nombre} ${data.usuario.apellido_paterno} ${data.usuario.apellido_materno}`;
+            document.getElementById("rol-usuario").textContent = data.usuario.tipo_usuario.charAt(0).toUpperCase() + data.usuario.tipo_usuario.slice(1);
         } else {
-            // Mostrar el nombre del usuario en el elemento con id "obtenerUsuarioPorId"
             alert("Error: " + (data.mensaje || "No se pudo obtener la información del usuario"));
         }
     })

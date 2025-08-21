@@ -23,7 +23,7 @@
             </div>
             <div class="p-6 text-center border-b border-green-700">
                 <div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-3 overflow-hidden">
-                    <img src="../img/images.png" alt="Administrador" class="w-full h-full object-cover">
+                    <img src="../img/image.png" alt="Administrador" class="w-full h-full object-cover">
                 </div>
                 <h3 id="nombre-usuario" class="font-semibold text-sm"></h3>
                 <p id="rol-usuario" class="text-xs text-green-200 mb-2"></p>
@@ -99,10 +99,75 @@
                 </div>
             </div>
 
-            <div id="mainContent" class="flex-1 p-8 bg-gray-50 overflow-y-auto">
-                <h2 class="text-xl font-semibold text-gray-800 mb-6">Documentación de estadías</h2>
-
+            <div class="p-8">
+                <h2 class="text-2xl font-bold mb-6">Documentación de estadías</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Tarjeta de alumno ejemplo -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="bg-green-700 text-white p-6">
+                            <h3 class="text-xl font-bold">María Rodríguez López</h3>
+                            <p class="text-green-100">Ingeniería en Sistemas Computacionales</p>
+                            <span class="bg-green-900 text-green-200 px-3 py-1 rounded-full text-xs font-semibold mt-2 inline-block">A01234567</span>
+                        </div>
+                        <div class="p-6 border-b border-gray-200">
+                            <h4 class="font-semibold text-gray-700 mb-2">Datos Personales</h4>
+                            <p class="text-sm text-gray-600 mb-1"><span class="font-medium">Correo:</span> maria.rodriguez@universidad.edu.mx</p>
+                            <p class="text-sm text-gray-600"><span class="font-medium">Empresa:</span> Innovación Solutore</p>
+                            <p class="text-sm text-gray-600"><span class="font-medium">Contacto:</span> Ana López</p>
+                        </div>
+                        <div class="p-6 border-b border-gray-200">
+                            <h4 class="font-semibold text-gray-700 mb-2">Datos de Estadía</h4>
+                            <p class="text-sm text-gray-600"><span class="font-medium">Proyecto:</span> Nombre del proyecto</p>
+                            <p class="text-sm text-gray-600"><span class="font-medium">Asesor externo:</span> Nombre del asesor</p>
+                            <p class="text-sm text-gray-600"><span class="font-medium">Duración:</span> 12 semanas</p>
+                            <p class="text-sm text-gray-600"><span class="font-medium">Inicio:</span> 2025-08-01</p>
+                            <p class="text-sm text-gray-600"><span class="font-medium">Fin:</span> 2025-10-24</p>
+                            <p class="text-sm text-gray-600"><span class="font-medium">Apoyo:</span> Beca económica</p>
+                            <p class="text-sm text-gray-600"><span class="font-medium">Estatus:</span> solicitada</p>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-semibold text-gray-700 mb-2">Documentos de Estadía</h4>
+                            <!-- Documento 1 -->
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium text-gray-800">Carta de Presentación</span>
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Aceptado (Completo)</span>
+                                </div>
+                                <p class="text-xs text-gray-500">Subido: 14/07/2023</p>
+                                <div class="flex space-x-2 mt-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-xs font-medium flex items-center"><i class="fas fa-eye mr-1"></i>Ver</button>
+                                    <button class="text-blue-600 hover:text-blue-800 text-xs font-medium flex items-center"><i class="fas fa-download mr-1"></i>Descargar</button>
+                                    <button class="text-blue-600 hover:text-blue-800 text-xs font-medium flex items-center"><i class="fas fa-upload mr-1"></i>Subir</button>
+                                </div>
+                            </div>
+                            <!-- Documento 2 -->
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium text-gray-800">Carta de Aceptación</span>
+                                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Pendiente de revisión</span>
+                                </div>
+                                <p class="text-xs text-gray-500">Subido: 15/07/2023</p>
+                                <div class="flex space-x-2 mt-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-xs font-medium flex items-center"><i class="fas fa-eye mr-1"></i>Ver</button>
+                                    <button class="text-blue-600 hover:text-blue-800 text-xs font-medium flex items-center"><i class="fas fa-download mr-1"></i>Descargar</button>
+                                    <button class="text-blue-600 hover:text-blue-800 text-xs font-medium flex items-center"><i class="fas fa-upload mr-1"></i>Subir</button>
+                                </div>
+                            </div>
+                            <!-- Documento 3 -->
+                            <div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium text-gray-800">Reporte Final</span>
+                                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">No subido</span>
+                                </div>
+                                <p class="text-xs text-gray-500">Subido: --/--/----</p>
+                                <div class="flex space-x-2 mt-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-xs font-medium flex items-center"><i class="fas fa-eye mr-1"></i>Ver</button>
+                                    <button class="text-blue-600 hover:text-blue-800 text-xs font-medium flex items-center"><i class="fas fa-download mr-1"></i>Descargar</button>
+                                    <button class="text-blue-600 hover:text-blue-800 text-xs font-medium flex items-center"><i class="fas fa-upload mr-1"></i>Subir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,61 +199,7 @@
         </div>
     </div>
 
-    <script src="documentacion.js"></script> <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sidebar toggle (para móviles)
-            const sidebar = document.getElementById('sidebar');
-            const closeSidebarBtn = document.getElementById('closeSidebarBtn'); 
-            const menuToggle = document.getElementById('menuToggle');
-            if (closeSidebarBtn && sidebar) {
-                closeSidebarBtn.addEventListener('click', function() {
-                    sidebar.classList.add('hidden');
-                });
-            }
-            if (menuToggle && sidebar) {
-                menuToggle.addEventListener('click', function() {
-                    sidebar.classList.remove('hidden');
-                });
-            }
 
-            // Notificaciones dropdown
-            const notificationsBtn = document.getElementById('notificationsBtn');
-            const notificationsDropdown = document.getElementById('notificationsDropdown');
-            if (notificationsBtn && notificationsDropdown) {
-                notificationsBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    notificationsDropdown.classList.toggle('hidden');
-                });
-                document.addEventListener('click', function() {
-                    notificationsDropdown.classList.add('hidden');
-                });
-                notificationsDropdown.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
-            }
-
-            // Logout modal
-            const logoutBtn = document.getElementById('logoutBtn');
-            const logoutModal = document.getElementById('logoutModal');
-            const cancelLogout = document.getElementById('cancelLogout');
-            const confirmLogout = document.getElementById('confirmLogout');
-
-            if (logoutBtn && logoutModal) {
-                logoutBtn.addEventListener('click', function() {
-                    logoutModal.classList.remove('hidden');
-                });
-            }
-            if (cancelLogout && logoutModal) {
-                cancelLogout.addEventListener('click', function() {
-                    logoutModal.classList.add('hidden');
-                });
-            }
-            if (confirmLogout) {
-                confirmLogout.addEventListener('click', function() {
-                    window.location.href = '../login-uth.html';
-                });
-            }
-        });
-    </script>
+    <script src="../Apis/Administracion/Documentacion/llenaado.js"></script>
 </body>
 </html>

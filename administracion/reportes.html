@@ -26,7 +26,7 @@
             <!-- User Profile -->
             <div class="p-6 text-center border-b border-green-700">
                 <div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-3 overflow-hidden">
-                    <img src="../img/images.png" alt="Administrador" class="w-full h-full object-cover">
+                    <img src="../img/image.png" alt="Administrador" class="w-full h-full object-cover">
                 </div>
                <h3 id="nombre-usuario" class="font-semibold text-sm"></h3>
                 <p id="rol-usuario" class="text-xs text-green-200 mb-2"></p>
@@ -119,7 +119,7 @@
                             </div>
                             <div>
                                 <p class="text-lg font-semibold text-gray-800">Estudiantes Activos</p>
-                                <p id="total-estudiantes" class="text-4xl font-bold text-gray-800"></p>
+                                <p id="total-alumnos" class="text-4xl font-bold text-gray-800"></p>
                                 <p class="text-sm text-green-600 flex items-center"></p>
                             </div>
                         </div>
@@ -130,9 +130,8 @@
                             </div>
                             <div>
                                 <p class="text-lg font-semibold text-gray-800">Empresas Participantes</p>
-                                <p id="total-empresas" class="text-4xl font-bold text-gray-900 mb-2"></p>
+                                <p id="contarEmpresas" class="text-4xl font-bold text-gray-900 mb-2"></p>
                                 <p class="text-sm text-green-600 flex items-center">
-                                    <i class="fas fa-plus mr-1 text-green-500"></i> 3 nuevas empresas
                                 </p>
                             </div>
                         </div>
@@ -321,5 +320,7 @@ if (menuToggle && sidebar) {
     }
 });
 </script>
+<script src="../Apis/Administracion/reportes/ActivoEstudiantes.js"></script>
+<script src="../Apis/Administracion/reportes/empresasAc.js"></script>
 </body>
 </html>
