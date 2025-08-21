@@ -5,70 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard UTH - Gestión de Estadías</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="estadias.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Estilos adicionales para el CRUD */
-        .modal {
-            backdrop-filter: blur(5px);
-        }
-        
-        .form-input {
-            transition: all 0.3s ease;
-        }
-        
-        .form-input:focus {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
-        }
-        
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .status-badge {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .btn-action {
-            transition: all 0.2s ease;
-        }
-        
-        .btn-action:hover {
-            transform: scale(1.05);
-        }
-        
-        .search-input {
-            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .search-input:focus {
-            background: white;
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-        }
-    </style>
 </head>
 <body>
     <div id="app" class="min-h-screen bg-gray-100 flex">
@@ -293,9 +232,6 @@
                                     <option value="completada">Completada</option>
                                     <option value="cancelada">Cancelada</option>
                                 </select>
-                                <button id="exportBtn" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                                    <i class="fas fa-download mr-2"></i>Exportar
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -339,135 +275,161 @@
 
     <!-- Modal para Crear/Editar Estadía -->
     <div id="estadiaModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 modal">
-        <div class="bg-white rounded-lg p-6 w-full max-w-2xl mx-auto max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between mb-6">
-                <h3 id="modalTitle" class="text-xl font-bold text-gray-800">Nueva Estadía</h3>
-                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-4xl mx-auto max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-green-600 text-xl"></i>
+                    </div>
+                    <h3 id="modalTitle" class="text-2xl font-bold text-gray-800">Nueva Estadía</h3>
+                </div>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600 transition-colors p-2 hover:bg-gray-100 rounded-full">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
             
-            <form id="estadiaForm" class="space-y-6">
+            <form id="estadiaForm" class="space-y-8">
                 <input type="hidden" id="estadiaId" value="">
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <!-- Información del Estudiante -->
-                    <div class="space-y-4">
-                        <h4 class="text-lg font-semibold text-gray-700 border-b pb-2">Información del Estudiante</h4>
-                        
-                        <div>
-                            <label for="nombreEstudiante" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo *</label>
-                            <input type="text" id="nombreEstudiante" required 
-                                   class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-3 pb-3 border-b-2 border-blue-200">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-blue-600"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-blue-800">Información del Estudiante</h4>
                         </div>
                         
-                        <div>
-                            <label for="matricula" class="block text-sm font-medium text-gray-700 mb-1">Matrícula *</label>
-                            <input type="text" id="matricula" required 
-                                   class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                        </div>
-                        
-                        <div>
-                            <label for="carrera" class="block text-sm font-medium text-gray-700 mb-1">Carrera *</label>
-                            <select id="carrera" required 
-                                    class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                                <option value="">Seleccionar carrera</option>
-                                <option value="Ing. Desarrollo y Gestión de Software">Ing. Desarrollo y Gestión de Software</option>
-                                <option value="Ing. en Sistemas Computacionales">Ing. en Sistemas Computacionales</option>
-                                <option value="Ing. Industrial">Ing. Industrial</option>
-                                <option value="Ing. en Mecatrónica">Ing. en Mecatrónica</option>
-                                <option value="Lic. en Administración">Lic. en Administración</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="emailEstudiante" class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                            <input type="email" id="emailEstudiante" required 
-                                   class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        <div class="space-y-4">
+                            <div>
+                                <label for="nombreEstudiante" class="block text-sm font-semibold text-gray-700 mb-2">Nombre Completo *</label>
+                                <input type="text" id="nombreEstudiante" required 
+                                       class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                            </div>
+                            
+                            <div>
+                                <label for="matricula" class="block text-sm font-semibold text-gray-700 mb-2">Matrícula *</label>
+                                <input type="text" id="matricula" required 
+                                       class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                            </div>
+                            
+                            <div>
+                                <label for="carrera" class="block text-sm font-semibold text-gray-700 mb-2">Carrera *</label>
+                                <select id="carrera" required 
+                                        class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                                    <option value="">Seleccionar carrera</option>
+                                    <option value="Ing. Desarrollo y Gestión de Software">Ing. Desarrollo y Gestión de Software</option>
+                                    <option value="Ing. en Sistemas Computacionales">Ing. en Sistemas Computacionales</option>
+                                    <option value="Ing. Industrial">Ing. Industrial</option>
+                                    <option value="Ing. en Mecatrónica">Ing. en Mecatrónica</option>
+                                    <option value="Lic. en Administración">Lic. en Administración</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="emailEstudiante" class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                                <input type="email" id="emailEstudiante" required 
+                                       class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                            </div>
                         </div>
                     </div>
                     
                     <!-- Información de la Empresa -->
-                    <div class="space-y-4">
-                        <h4 class="text-lg font-semibold text-gray-700 border-b pb-2">Información de la Empresa</h4>
-                        
-                        <div>
-                            <label for="nombreEmpresa" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la Empresa *</label>
-                            <input type="text" id="nombreEmpresa" required 
-                                   class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-3 pb-3 border-b-2 border-green-200">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-building text-green-600"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-green-800">Información de la Empresa</h4>
                         </div>
                         
-                        <div>
-                            <label for="contactoEmpresa" class="block text-sm font-medium text-gray-700 mb-1">Contacto en la Empresa</label>
-                            <input type="text" id="contactoEmpresa" 
-                                   class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                        </div>
-                        
-                        <div>
-                            <label for="telefonoEmpresa" class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
-                            <input type="tel" id="telefonoEmpresa" 
-                                   class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                        </div>
-                        
-                        <div>
-                            <label for="direccionEmpresa" class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
-                            <textarea id="direccionEmpresa" rows="3" 
-                                      class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"></textarea>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="nombreEmpresa" class="block text-sm font-semibold text-gray-700 mb-2">Nombre de la Empresa *</label>
+                                <input type="text" id="nombreEmpresa" required 
+                                       class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200">
+                            </div>
+                            
+                            <div>
+                                <label for="contactoEmpresa" class="block text-sm font-semibold text-gray-700 mb-2">Contacto en la Empresa</label>
+                                <input type="text" id="contactoEmpresa" 
+                                       class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200">
+                            </div>
+                            
+                            <div>
+                                <label for="telefonoEmpresa" class="block text-sm font-semibold text-gray-700 mb-2">Teléfono</label>
+                                <input type="tel" id="telefonoEmpresa" 
+                                       class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200">
+                            </div>
+                            
+                            <div>
+                                <label for="direccionEmpresa" class="block text-sm font-semibold text-gray-700 mb-2">Dirección</label>
+                                <textarea id="direccionEmpresa" rows="3" 
+                                          class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Información del Proyecto -->
-                <div class="space-y-4">
-                    <h4 class="text-lg font-semibold text-gray-700 border-b pb-2">Información del Proyecto</h4>
-                    
-                    <div>
-                        <label for="nombreProyecto" class="block text-sm font-medium text-gray-700 mb-1">Nombre del Proyecto *</label>
-                        <input type="text" id="nombreProyecto" required 
-                               class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-3 pb-3 border-b-2 border-purple-200">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-project-diagram text-purple-600"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-purple-800">Información del Proyecto</h4>
                     </div>
                     
-                    <div>
-                        <label for="descripcionProyecto" class="block text-sm font-medium text-gray-700 mb-1">Descripción del Proyecto</label>
-                        <textarea id="descripcionProyecto" rows="4" 
-                                  class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"></textarea>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="space-y-4">
                         <div>
-                            <label for="fechaInicio" class="block text-sm font-medium text-gray-700 mb-1">Fecha de Inicio *</label>
-                            <input type="date" id="fechaInicio" required 
-                                   class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                            <label for="nombreProyecto" class="block text-sm font-semibold text-gray-700 mb-2">Nombre del Proyecto *</label>
+                            <input type="text" id="nombreProyecto" required 
+                                   class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200">
                         </div>
                         
                         <div>
-                            <label for="fechaFin" class="block text-sm font-medium text-gray-700 mb-1">Fecha de Fin *</label>
-                            <input type="date" id="fechaFin" required 
-                                   class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                            <label for="descripcionProyecto" class="block text-sm font-semibold text-gray-700 mb-2">Descripción del Proyecto</label>
+                            <textarea id="descripcionProyecto" rows="4" 
+                                      class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"></textarea>
                         </div>
                         
-                        <div>
-                            <label for="estado" class="block text-sm font-medium text-gray-700 mb-1">Estado *</label>
-                            <select id="estado" required 
-                                    class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                                <option value="pendiente">Pendiente</option>
-                                <option value="activa">Activa</option>
-                                <option value="completada">Completada</option>
-                                <option value="cancelada">Cancelada</option>
-                            </select>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label for="fechaInicio" class="block text-sm font-semibold text-gray-700 mb-2">Fecha de Inicio *</label>
+                                <input type="date" id="fechaInicio" required 
+                                       class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200">
+                            </div>
+                            
+                            <div>
+                                <label for="fechaFin" class="block text-sm font-semibold text-gray-700 mb-2">Fecha de Fin *</label>
+                                <input type="date" id="fechaFin" required 
+                                       class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200">
+                            </div>
+                            
+                            <div>
+                                <label for="estado" class="block text-sm font-semibold text-gray-700 mb-2">Estado *</label>
+                                <select id="estado" required 
+                                        class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200">
+                                    <option value="pendiente">Pendiente</option>
+                                    <option value="activa">Activa</option>
+                                    <option value="completada">Completada</option>
+                                    <option value="cancelada">Cancelada</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Botones de Acción -->
-                <div class="flex justify-end space-x-3 pt-6 border-t">
-                    <button type="button" id="cancelBtn" class="px-6 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                        Cancelar
+                <div class="flex justify-end space-x-4 pt-8 border-t-2 border-gray-200">
+                    <button type="button" id="cancelBtn" class="px-8 py-3 text-gray-600 border-2 border-gray-300 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 font-medium">
+                        <i class="fas fa-times mr-2"></i>Cancelar
                     </button>
-                    <button type="submit" id="saveBtn" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                        <i class="fas fa-save mr-2"></i>Guardar
+                    <button type="submit" id="saveBtn" class="px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl">
+                        <i class="fas fa-save mr-2"></i>Guardar Estadía
                     </button>
                 </div>
             </form>
@@ -543,542 +505,6 @@
         </div>
     </div>
 
-    <script>
-        // Estado global de la aplicación
-        let estadias = [];
-        let currentEstadiaId = null;
-        let filteredEstadias = [];
-
-        // Elementos del DOM
-        const estadiaModal = document.getElementById('estadiaModal');
-        const deleteModal = document.getElementById('deleteModal');
-        const viewModal = document.getElementById('viewModal');
-        const estadiaForm = document.getElementById('estadiaForm');
-        const estadiasTableBody = document.getElementById('estadiasTableBody');
-        const emptyState = document.getElementById('emptyState');
-        const searchInput = document.getElementById('searchInput');
-        const statusFilter = document.getElementById('statusFilter');
-
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-            setupEventListeners();
-            loadSampleData();
-            renderEstadias();
-            updateStats();
-        });
-
-        function initializeApp() {
-            // Configurar sidebar
-            const sidebar = document.getElementById('sidebar');
-            const menuToggle = document.getElementById('menuToggle');
-            const closeSidebarBtn = document.getElementById('closeSidebarBtn');
-
-            if (menuToggle) {
-                menuToggle.addEventListener('click', () => {
-                    sidebar.classList.toggle('sidebar-open');
-                });
-            }
-
-            if (closeSidebarBtn) {
-                closeSidebarBtn.addEventListener('click', () => {
-                    sidebar.classList.remove('sidebar-open');
-                });
-            }
-
-            // Configurar notificaciones
-            const notificationsBtn = document.getElementById('notificationsBtn');
-            const notificationsDropdown = document.getElementById('notificationsDropdown');
-            const closeNotifications = document.getElementById('closeNotifications');
-
-            if (notificationsBtn) {
-                notificationsBtn.addEventListener('click', () => {
-                    notificationsDropdown.classList.toggle('hidden');
-                });
-            }
-
-            if (closeNotifications) {
-                closeNotifications.addEventListener('click', () => {
-                    notificationsDropdown.classList.add('hidden');
-                });
-            }
-
-            // Configurar logout
-            const logoutBtn = document.getElementById('logoutBtn');
-            const logoutModal = document.getElementById('logoutModal');
-            const cancelLogout = document.getElementById('cancelLogout');
-            const confirmLogout = document.getElementById('confirmLogout');
-
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', () => {
-                    logoutModal.classList.remove('hidden');
-                });
-            }
-
-            if (cancelLogout) {
-                cancelLogout.addEventListener('click', () => {
-                    logoutModal.classList.add('hidden');
-                });
-            }
-
-            if (confirmLogout) {
-                confirmLogout.addEventListener('click', () => {
-                    window.location.href = '../login-uth.html';
-                });
-            }
-        }
-
-        function setupEventListeners() {
-            // Botón nueva estadía
-            document.getElementById('newEstadiaBtn').addEventListener('click', () => openEstadiaModal());
-
-            // Botones del modal
-            document.getElementById('closeModalBtn').addEventListener('click', closeEstadiaModal);
-            document.getElementById('cancelBtn').addEventListener('click', closeEstadiaModal);
-
-            // Formulario
-            estadiaForm.addEventListener('submit', handleFormSubmit);
-
-            // Modal de eliminación
-            document.getElementById('cancelDeleteBtn').addEventListener('click', closeDeleteModal);
-            document.getElementById('confirmDeleteBtn').addEventListener('click', confirmDelete);
-
-            // Modal de vista
-            document.getElementById('closeViewModalBtn').addEventListener('click', closeViewModal);
-
-            // Búsqueda y filtros
-            searchInput.addEventListener('input', handleSearch);
-            statusFilter.addEventListener('change', handleFilter);
-
-            // Exportar
-            document.getElementById('exportBtn').addEventListener('click', exportData);
-
-            // Cerrar modales al hacer clic fuera
-            window.addEventListener('click', (e) => {
-                if (e.target === estadiaModal) closeEstadiaModal();
-                if (e.target === deleteModal) closeDeleteModal();
-                if (e.target === viewModal) closeViewModal();
-            });
-        }
-
-        function loadSampleData() {
-            estadias = [
-                {
-                    id: 1,
-                    nombreEstudiante: 'Carlos Martínez Gómez',
-                    matricula: '3522110450',
-                    carrera: 'Ing. Desarrollo y Gestión de Software',
-                    emailEstudiante: 'carlos.martinez@uth.edu.mx',
-                    nombreEmpresa: 'TechSolutions México S.A. de C.V.',
-                    contactoEmpresa: 'Ing. María González',
-                    telefonoEmpresa: '222-123-4567',
-                    direccionEmpresa: 'Av. Reforma 123, Col. Centro, Puebla, Pue.',
-                    nombreProyecto: 'Sistema de Gestión de Inventarios',
-                    descripcionProyecto: 'Desarrollo de un sistema web para el control y gestión de inventarios de la empresa.',
-                    fechaInicio: '2024-01-15',
-                    fechaFin: '2024-05-15',
-                    estado: 'activa',
-                    fechaCreacion: '2024-01-10'
-                },
-                {
-                    id: 2,
-                    nombreEstudiante: 'Ana González Ruiz',
-                    matricula: '3522114875',
-                    carrera: 'Ing. en Sistemas Computacionales',
-                    emailEstudiante: 'ana.gonzalez@uth.edu.mx',
-                    nombreEmpresa: 'Innovación Digital SA',
-                    contactoEmpresa: 'Lic. Roberto Pérez',
-                    telefonoEmpresa: '222-987-6543',
-                    direccionEmpresa: 'Blvd. Atlixco 456, Col. La Paz, Puebla, Pue.',
-                    nombreProyecto: 'App Móvil para Delivery',
-                    descripcionProyecto: 'Desarrollo de aplicación móvil para servicio de entrega a domicilio.',
-                    fechaInicio: '2024-02-01',
-                    fechaFin: '2024-06-01',
-                    estado: 'pendiente',
-                    fechaCreacion: '2024-01-25'
-                },
-                {
-                    id: 3,
-                    nombreEstudiante: 'Luis Pérez Mora',
-                    matricula: '3522110653',
-                    carrera: 'Ing. Industrial',
-                    emailEstudiante: 'luis.perez@uth.edu.mx',
-                    nombreEmpresa: 'Manufacturas del Centro',
-                    contactoEmpresa: 'Ing. Carmen López',
-                    telefonoEmpresa: '222-555-0123',
-                    direccionEmpresa: 'Carretera Federal 150, Km 5, Huejotzingo, Pue.',
-                    nombreProyecto: 'Optimización de Procesos Productivos',
-                    descripcionProyecto: 'Análisis y mejora de los procesos de producción en la línea de ensamble.',
-                    fechaInicio: '2023-09-01',
-                    fechaFin: '2024-01-01',
-                    estado: 'completada',
-                    fechaCreacion: '2023-08-20'
-                }
-            ];
-        }
-
-        function openEstadiaModal(estadia = null) {
-            const modalTitle = document.getElementById('modalTitle');
-            const estadiaId = document.getElementById('estadiaId');
-
-            if (estadia) {
-                modalTitle.textContent = 'Editar Estadía';
-                estadiaId.value = estadia.id;
-                fillForm(estadia);
-            } else {
-                modalTitle.textContent = 'Nueva Estadía';
-                estadiaId.value = '';
-                estadiaForm.reset();
-            }
-
-            estadiaModal.classList.remove('hidden');
-            estadiaModal.classList.add('fade-in');
-        }
-
-        function closeEstadiaModal() {
-            estadiaModal.classList.add('hidden');
-            estadiaForm.reset();
-        }
-
-        function fillForm(estadia) {
-            document.getElementById('nombreEstudiante').value = estadia.nombreEstudiante;
-            document.getElementById('matricula').value = estadia.matricula;
-            document.getElementById('carrera').value = estadia.carrera;
-            document.getElementById('emailEstudiante').value = estadia.emailEstudiante;
-            document.getElementById('nombreEmpresa').value = estadia.nombreEmpresa;
-            document.getElementById('contactoEmpresa').value = estadia.contactoEmpresa;
-            document.getElementById('telefonoEmpresa').value = estadia.telefonoEmpresa;
-            document.getElementById('direccionEmpresa').value = estadia.direccionEmpresa;
-            document.getElementById('nombreProyecto').value = estadia.nombreProyecto;
-            document.getElementById('descripcionProyecto').value = estadia.descripcionProyecto;
-            document.getElementById('fechaInicio').value = estadia.fechaInicio;
-            document.getElementById('fechaFin').value = estadia.fechaFin;
-            document.getElementById('estado').value = estadia.estado;
-        }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-
-            const formData = new FormData(estadiaForm);
-            const estadiaId = document.getElementById('estadiaId').value;
-
-            const estadiaData = {
-                nombreEstudiante: document.getElementById('nombreEstudiante').value,
-                matricula: document.getElementById('matricula').value,
-                carrera: document.getElementById('carrera').value,
-                emailEstudiante: document.getElementById('emailEstudiante').value,
-                nombreEmpresa: document.getElementById('nombreEmpresa').value,
-                contactoEmpresa: document.getElementById('contactoEmpresa').value,
-                telefonoEmpresa: document.getElementById('telefonoEmpresa').value,
-                direccionEmpresa: document.getElementById('direccionEmpresa').value,
-                nombreProyecto: document.getElementById('nombreProyecto').value,
-                descripcionProyecto: document.getElementById('descripcionProyecto').value,
-                fechaInicio: document.getElementById('fechaInicio').value,
-                fechaFin: document.getElementById('fechaFin').value,
-                estado: document.getElementById('estado').value
-            };
-
-            if (estadiaId) {
-                // Editar estadía existente
-                const index = estadias.findIndex(e => e.id == estadiaId);
-                if (index !== -1) {
-                    estadias[index] = { ...estadias[index], ...estadiaData };
-                    showNotification('Estadía actualizada correctamente', 'success');
-                }
-            } else {
-                // Crear nueva estadía
-                const newEstadia = {
-                    id: Date.now(),
-                    ...estadiaData,
-                    fechaCreacion: new Date().toISOString().split('T')[0]
-                };
-                estadias.unshift(newEstadia);
-                showNotification('Estadía creada correctamente', 'success');
-            }
-
-            closeEstadiaModal();
-            renderEstadias();
-            updateStats();
-        }
-
-        function openDeleteModal(id) {
-            currentEstadiaId = id;
-            deleteModal.classList.remove('hidden');
-        }
-
-        function closeDeleteModal() {
-            deleteModal.classList.add('hidden');
-            currentEstadiaId = null;
-        }
-
-        function confirmDelete() {
-            if (currentEstadiaId) {
-                estadias = estadias.filter(e => e.id !== currentEstadiaId);
-                showNotification('Estadía eliminada correctamente', 'success');
-                closeDeleteModal();
-                renderEstadias();
-                updateStats();
-            }
-        }
-
-        function openViewModal(id) {
-            const estadia = estadias.find(e => e.id === id);
-            if (!estadia) return;
-
-            const viewContent = document.getElementById('viewContent');
-            viewContent.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div class="bg-blue-50 p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-blue-800 mb-3">Información del Estudiante</h4>
-                            <div class="space-y-2">
-                                <p><span class="font-medium">Nombre:</span> ${estadia.nombreEstudiante}</p>
-                                <p><span class="font-medium">Matrícula:</span> ${estadia.matricula}</p>
-                                <p><span class="font-medium">Carrera:</span> ${estadia.carrera}</p>
-                                <p><span class="font-medium">Email:</span> ${estadia.emailEstudiante}</p>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-green-50 p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-green-800 mb-3">Información de la Empresa</h4>
-                            <div class="space-y-2">
-                                <p><span class="font-medium">Empresa:</span> ${estadia.nombreEmpresa}</p>
-                                <p><span class="font-medium">Contacto:</span> ${estadia.contactoEmpresa || 'No especificado'}</p>
-                                <p><span class="font-medium">Teléfono:</span> ${estadia.telefonoEmpresa || 'No especificado'}</p>
-                                <p><span class="font-medium">Dirección:</span> ${estadia.direccionEmpresa || 'No especificada'}</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <div class="bg-purple-50 p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-purple-800 mb-3">Información del Proyecto</h4>
-                            <div class="space-y-2">
-                                <p><span class="font-medium">Proyecto:</span> ${estadia.nombreProyecto}</p>
-                                <p><span class="font-medium">Descripción:</span> ${estadia.descripcionProyecto || 'No especificada'}</p>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-yellow-50 p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-yellow-800 mb-3">Fechas y Estado</h4>
-                            <div class="space-y-2">
-                                <p><span class="font-medium">Fecha de Inicio:</span> ${formatDate(estadia.fechaInicio)}</p>
-                                <p><span class="font-medium">Fecha de Fin:</span> ${formatDate(estadia.fechaFin)}</p>
-                                <p><span class="font-medium">Estado:</span> ${getStatusBadge(estadia.estado)}</p>
-                                <p><span class="font-medium">Duración:</span> ${calculateDuration(estadia.fechaInicio, estadia.fechaFin)} días</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            viewModal.classList.remove('hidden');
-        }
-
-        function closeViewModal() {
-            viewModal.classList.add('hidden');
-        }
-
-        function renderEstadias() {
-            const estadiasToRender = filteredEstadias.length > 0 ? filteredEstadias : estadias;
-
-            if (estadiasToRender.length === 0) {
-                estadiasTableBody.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                return;
-            }
-
-            emptyState.classList.add('hidden');
-
-            estadiasTableBody.innerHTML = estadiasToRender.map(estadia => `
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
-                                ${estadia.nombreEstudiante.split(' ').map(n => n[0]).join('').substring(0, 2)}
-                            </div>
-                            <div class="ml-4">
-                                <div class="text-sm font-medium text-gray-900">${estadia.nombreEstudiante}</div>
-                                <div class="text-sm text-gray-500">${estadia.matricula}</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">${estadia.nombreEmpresa}</div>
-                        <div class="text-sm text-gray-500">${estadia.contactoEmpresa || 'Sin contacto'}</div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="text-sm text-gray-900 max-w-xs truncate" title="${estadia.nombreProyecto}">
-                            ${estadia.nombreProyecto}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div>${formatDate(estadia.fechaInicio)}</div>
-                        <div>${formatDate(estadia.fechaFin)}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        ${getStatusBadge(estadia.estado)}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <div class="flex space-x-2">
-                            <button onclick="openViewModal(${estadia.id})" 
-                                    class="btn-action text-blue-600 hover:text-blue-900 p-2 rounded-full hover:bg-blue-100" 
-                                    title="Ver detalles">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button onclick="openEstadiaModal(${JSON.stringify(estadia).replace(/"/g, '&quot;')})" 
-                                    class="btn-action text-green-600 hover:text-green-900 p-2 rounded-full hover:bg-green-100" 
-                                    title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button onclick="openDeleteModal(${estadia.id})" 
-                                    class="btn-action text-red-600 hover:text-red-900 p-2 rounded-full hover:bg-red-100" 
-                                    title="Eliminar">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function updateStats() {
-            const total = estadias.length;
-            const activas = estadias.filter(e => e.estado === 'activa').length;
-            const pendientes = estadias.filter(e => e.estado === 'pendiente').length;
-            const completadas = estadias.filter(e => e.estado === 'completada').length;
-
-            document.getElementById('totalEstadias').textContent = total;
-            document.getElementById('estadiasActivas').textContent = activas;
-            document.getElementById('estadiasPendientes').textContent = pendientes;
-            document.getElementById('estadiasCompletadas').textContent = completadas;
-        }
-
-        function handleSearch() {
-            const searchTerm = searchInput.value.toLowerCase();
-            filteredEstadias = estadias.filter(estadia => 
-                estadia.nombreEstudiante.toLowerCase().includes(searchTerm) ||
-                estadia.nombreEmpresa.toLowerCase().includes(searchTerm) ||
-                estadia.nombreProyecto.toLowerCase().includes(searchTerm) ||
-                estadia.matricula.toLowerCase().includes(searchTerm)
-            );
-            renderEstadias();
-        }
-
-        function handleFilter() {
-            const status = statusFilter.value;
-            if (status) {
-                filteredEstadias = estadias.filter(estadia => estadia.estado === status);
-            } else {
-                filteredEstadias = [];
-            }
-            renderEstadias();
-        }
-
-        function exportData() {
-            const csvContent = generateCSV();
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            link.setAttribute('href', url);
-            link.setAttribute('download', `estadias_${new Date().toISOString().split('T')[0]}.csv`);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            showNotification('Datos exportados correctamente', 'success');
-        }
-
-        function generateCSV() {
-            const headers = [
-                'Estudiante', 'Matrícula', 'Carrera', 'Email', 'Empresa', 
-                'Contacto', 'Proyecto', 'Fecha Inicio', 'Fecha Fin', 'Estado'
-            ];
-            
-            const rows = estadias.map(estadia => [
-                estadia.nombreEstudiante,
-                estadia.matricula,
-                estadia.carrera,
-                estadia.emailEstudiante,
-                estadia.nombreEmpresa,
-                estadia.contactoEmpresa || '',
-                estadia.nombreProyecto,
-                estadia.fechaInicio,
-                estadia.fechaFin,
-                estadia.estado
-            ]);
-
-            return [headers, ...rows]
-                .map(row => row.map(field => `"${field}"`).join(','))
-                .join('\n');
-        }
-
-        function getStatusBadge(status) {
-            const statusConfig = {
-                'pendiente': { class: 'bg-yellow-100 text-yellow-800', text: 'Pendiente', icon: 'fas fa-clock' },
-                'activa': { class: 'bg-green-100 text-green-800', text: 'Activa', icon: 'fas fa-play-circle' },
-                'completada': { class: 'bg-blue-100 text-blue-800', text: 'Completada', icon: 'fas fa-check-circle' },
-                'cancelada': { class: 'bg-red-100 text-red-800', text: 'Cancelada', icon: 'fas fa-times-circle' }
-            };
-
-            const config = statusConfig[status] || statusConfig.pendiente;
-            return `
-                <span class="status-badge px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${config.class}">
-                    <i class="${config.icon} mr-1"></i>
-                    ${config.text}
-                </span>
-            `;
-        }
-
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'short', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('es-ES', options);
-        }
-
-        function calculateDuration(startDate, endDate) {
-            const start = new Date(startDate);
-            const end = new Date(endDate);
-            const diffTime = Math.abs(end - start);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            return diffDays;
-        }
-
-        function showNotification(message, type = 'info') {
-            const colors = {
-                success: 'bg-green-500',
-                error: 'bg-red-500',
-                info: 'bg-blue-500',
-                warning: 'bg-yellow-500'
-            };
-
-            const notification = document.createElement('div');
-            notification.className = `fixed top-4 right-4 ${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-transform duration-300 translate-x-full`;
-            notification.innerHTML = `
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle mr-2"></i>
-                    <span>${message}</span>
-                </div>
-            `;
-
-            document.body.appendChild(notification);
-
-            setTimeout(() => {
-                notification.classList.remove('translate-x-full');
-            }, 100);
-
-            setTimeout(() => {
-                notification.classList.add('translate-x-full');
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 3000);
-        }
-
-        // Hacer funciones globales para los event handlers inline
-        window.openEstadiaModal = openEstadiaModal;
-        window.openDeleteModal = openDeleteModal;
-        window.openViewModal = openViewModal;
-    </script>
+    <script src="estadias.js"></script>
 </body>
 </html>
