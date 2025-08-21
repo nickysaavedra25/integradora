@@ -19,6 +19,20 @@
             if (data.total_cartasPres!== undefined) {
                 // Mostrar el total de estadías en el elemento con id "total-estadias", en el html
                 document.getElementById("listaCartasPres").textContent = data.total_cartasPres;
+
+                const lista = document.getElementById("listaCartasPresLista");
+                lista.innerHTML = ""; // Limpiar la lista antes de agregar nuevos elementos
+
+                data.nombres_alumnos.forEach(nombre => {
+                    const li = document.createElement("li");
+                    li.className = "flex justify-between w-full";
+                    
+                    const nombreSpan = document.createElement("span");
+                    nombreSpan.textContent = nombre;
+
+                    li.spendChild(nombreSpan);
+                    li.spendChild(li);
+                });
             } else {
                 // Si no está la propiedad, mostrar un mensaje de error
                 alert("Error: " + (data.mensaje || "Error al obtener las cartas de Aceptacion "));
