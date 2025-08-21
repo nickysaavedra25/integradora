@@ -3,762 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard UTN - Visualización de Documentos</title>
+    <title>Dashboard UTH - Visualizar Documentos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            line-height: 1.5;
-            color: #374151;
-            background-color: #f3f4f6;
-            min-height: 100vh;
-            display: flex;
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: 250px;
-            background: linear-gradient(to bottom, #166534, #14532d);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            transition: width 0.3s ease;
-        }
-
-        .sidebar.closed {
-            width: 70px;
-        }
-
-        .sidebar-header {
-            padding: 1rem;
-            border-bottom: 1px solid #15803d;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            height: 2rem;
-            width: auto;
-            margin-right: 0.5rem;
-        }
-
-        .logo-text {
-            font-weight: 600;
-        }
-
-        .sidebar.closed .logo-text,
-        .sidebar.closed .user-info,
-        .sidebar.closed .sidebar-text {
-            display: none;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: white;
-            padding: 0.5rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .close-btn:hover {
-            background-color: #047857;
-            color: #bbf7d0;
-        }
-
-        .user-info {
-            padding: 1.5rem;
-            text-align: center;
-            border-bottom: 1px solid #15803d;
-        }
-
-        .user-avatar {
-            width: 4rem;
-            height: 4rem;
-            background-color: #d1d5db;
-            border-radius: 50%;
-            margin: 0 auto 0.75rem;
-            overflow: hidden;
-        }
-
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .user-name {
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-
-        .user-details {
-            font-size: 0.75rem;
-            color: #bbf7d0;
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-menu {
-            flex: 1;
-            padding: 1rem 0;
-        }
-
-        .nav-list {
-            list-style: none;
-        }
-
-        .nav-item {
-            margin-bottom: 0.25rem;
-        }
-
-        .nav-btn {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            background: none;
-            border: none;
-            color: #bbf7d0;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.875rem;
-        }
-
-        .nav-btn:hover {
-            color: white;
-            background-color: #047857;
-        }
-
-        .nav-btn.active {
-            color: white;
-            background-color: #047857;
-            border-right: 3px solid #4ade80;
-        }
-
-        .nav-icon {
-            width: 1rem;
-            height: 1rem;
-            margin-right: 0.75rem;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .top-bar {
-            background: white;
-            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            border-bottom: 1px solid #e5e7eb;
-            padding: 1rem 1.5rem;
-        }
-
-        .top-bar-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .menu-toggle {
-            padding: 0.5rem;
-            background: none;
-            border: none;
-            color: #4b5563;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .menu-toggle:hover {
-            color: #1f2937;
-            background-color: #f3f4f6;
-        }
-
-        .page-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1f2937;
-        }
-
-        .top-bar-right {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 0.75rem;
-            font-size: 0.875rem;
-            border-radius: 0.25rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-        }
-
-        .btn-green {
-            background-color: #10b981;
-            color: white;
-        }
-
-        .btn-green:hover {
-            background-color: #059669;
-        }
-
-        .btn-red {
-            background-color: #ef4444;
-            color: white;
-        }
-
-        .btn-red:hover {
-            background-color: #dc2626;
-        }
-
-        .btn i {
-            margin-right: 0.5rem;
-        }
-
-        .notification-badge {
-            position: absolute;
-            top: -0.25rem;
-            right: -0.25rem;
-            width: 1rem;
-            height: 1rem;
-            background-color: #ef4444;
-            color: white;
-            font-size: 0.75rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .relative {
-            position: relative;
-        }
-
-        /* Content Area */
-        .content-area {
-            flex: 1;
-            padding: 2rem;
-            background-color: #f9fafb;
-        }
-
-        .container {
-            max-width: 72rem;
-            margin: 0 auto;
-        }
-
-        /* Cards */
-        .card {
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            border: 1px solid #e5e7eb;
-            margin-bottom: 2rem;
-        }
-
-        .card-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: between;
-            align-items: center;
-        }
-
-        .card-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #1f2937;
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        /* Table */
-        .table-container {
-            overflow-x: auto;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table th,
-        .table td {
-            padding: 0.75rem 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .table th {
-            background-color: #f9fafb;
-            font-weight: 500;
-            font-size: 0.75rem;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .table td {
-            font-size: 0.875rem;
-            color: #374151;
-        }
-
-        .table tr:hover {
-            background-color: #f9fafb;
-        }
-
-        .document-info {
-            display: flex;
-            align-items: center;
-        }
-
-        .document-info i {
-            color: #6b7280;
-            margin-right: 0.75rem;
-        }
-
-        .document-name {
-            font-weight: 500;
-            color: #1f2937;
-        }
-
-        .document-size {
-            font-size: 0.75rem;
-            color: #6b7280;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.125rem 0.5rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-            border-radius: 9999px;
-        }
-
-        .badge-blue {
-            background-color: #dbeafe;
-            color: #1e40af;
-        }
-
-        .badge-purple {
-            background-color: #ede9fe;
-            color: #5b21b6;
-        }
-
-        .badge-yellow {
-            background-color: #fef3c7;
-            color: #92400e;
-        }
-
-        .badge-green {
-            background-color: #dcfce7;
-            color: #166534;
-        }
-
-        .badge-red {
-            background-color: #fee2e2;
-            color: #991b1b;
-        }
-
-        .badge-gray {
-            background-color: #f3f4f6;
-            color: #374151;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .action-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.25rem;
-            border-radius: 0.25rem;
-            transition: all 0.2s;
-        }
-
-        .action-btn:hover {
-            background-color: #f3f4f6;
-        }
-
-        .action-btn.view {
-            color: #10b981;
-        }
-
-        .action-btn.download {
-            color: #3b82f6;
-        }
-
-        .action-btn.delete {
-            color: #ef4444;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-        }
-
-        .empty-state i {
-            font-size: 3rem;
-            color: #d1d5db;
-            margin-bottom: 1rem;
-        }
-
-        .empty-state h4 {
-            font-size: 1.125rem;
-            font-weight: 500;
-            color: #6b7280;
-        }
-
-        .empty-state p {
-            color: #9ca3af;
-            margin-top: 0.25rem;
-        }
-
-        /* Filter */
-        .filter-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .filter-select {
-            position: relative;
-        }
-
-        .filter-select select {
-            appearance: none;
-            background-color: #f3f4f6;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
-            padding: 0.25rem 2rem 0.25rem 0.75rem;
-            font-size: 0.875rem;
-        }
-
-        .filter-select::after {
-            content: '\f078';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            right: 0.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #374151;
-            pointer-events: none;
-            font-size: 0.75rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                z-index: 40;
-                height: 100vh;
-            }
-            
-            .sidebar.closed {
-                transform: translateX(-100%);
-                width: 250px;
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .justify-between {
-            justify-content: space-between;
-        }
-
-        .items-center {
-            align-items: center;
-        }
-
-        .gap-4 {
-            gap: 1rem;
-        }
-    </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <div id="sidebar" class="sidebar">
-        <!-- Header with close button -->
-        <div class="sidebar-header">
-            <div class="logo-container">
-                <img src="../img/images.png" alt="UTN Logo" class="logo-img">
-                <span class="logo-text">UTN Estadías</span>
-            </div>
-            <button id="closeSidebarBtn" class="close-btn">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-
-        <!-- User Profile -->
-        <div class="user-info">
-            <div class="user-avatar">
-                <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" 
-                     alt="Carlos Martinez Gomez">
-            </div>
-            <h3 class="user-name">Carlos Martínez Gómez</h3>
-            <p class="user-details">9° Cuatrimestre</p>
-            <p class="user-details">Semestre: Ene - Abr 2023</p>
-            <p class="user-details">Ing. Desarrollo y Gestión de Software</p>
-            <p class="user-details">Grupo: B</p>
-        </div>
-
-        <!-- Navigation Menu -->
-        <nav class="nav-menu">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <button class="nav-btn" data-section="inicio">
-                        <i class="fas fa-home nav-icon"></i>
-                        <span class="sidebar-text">Inicio</span>
+    <div id="app" class="min-h-screen bg-gray-100 flex">
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar-open w-64 bg-gradient-to-b from-green-800 to-green-900 text-white flex flex-col">
+            <!-- Header with close button -->
+            <div class="p-4 border-b border-green-700">
+                <div class="flex items-center">
+                    <button id="closeSidebarBtn" class="p-2 text-white hover:text-green-200 hover:bg-green-700 rounded transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-btn" data-section="mi-estadia">
-                        <i class="fas fa-user-graduate nav-icon"></i>
-                        <span class="sidebar-text">Mi Estadía</span>
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-btn" data-section="cronograma">
-                        <i class="fas fa-calendar-alt nav-icon"></i>
-                        <span class="sidebar-text">Cronograma</span>
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-btn active" data-section="documentos">
-                        <i class="fas fa-file-alt nav-icon"></i>
-                        <span class="sidebar-text">Documentos</span>
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-btn" data-section="seguimiento">
-                        <i class="fas fa-chart-line nav-icon"></i>
-                        <span class="sidebar-text">Seguimiento</span>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Top Bar -->
-        <div class="top-bar">
-            <div class="top-bar-content">
-                <!-- Left side - Menu Toggle -->
-                <div class="top-bar-left">
-                    <button id="menuToggle" class="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <h2 class="page-title">Documentos</h2>
                 </div>
+            </div>
 
-                <!-- Right side buttons -->
-                <div class="top-bar-right">
-                    <!-- Notifications Button -->
-                    <div class="relative">
-                        <button id="notificationsBtn" class="btn btn-green">
-                            <i class="fas fa-bell"></i>
-                            <span id="notificationBadge" class="notification-badge">3</span>
+            <!-- User Profile -->
+            <div class="p-6 text-center border-b border-green-700">
+                <div class="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-3 overflow-hidden">
+                    <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" 
+                         alt="José Luna Hernández" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-semibold text-sm">José Luna Hernández</h3>
+                <p class="text-xs text-green-200 mb-2">Docente</p>
+                <p class="text-xs text-green-200">Ing. en Sistemas Computacionales</p>
+                <p class="text-xs text-green-200">Coordinador de Estadías</p>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="flex-1 py-4">
+                <ul class="space-y-1">
+                    <li>
+                        <a href="inicio.html" class="nav-btn w-full flex items-center px-4 py-2 text-left hover:bg-green-700 rounded transition-colors">
+                            <i class="fas fa-home w-4 h-4 mr-3"></i>
+                            <span class="text-sm">Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mi-estadia.html" class="nav-btn w-full flex items-center px-4 py-2 text-left hover:bg-green-700 rounded transition-colors">
+                            <i class="fas fa-clipboard-list w-4 h-4 mr-3"></i>
+                            <span class="text-sm">Mi Estadía</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cronograma.html" class="nav-btn w-full flex items-center px-4 py-2 text-left hover:bg-green-700 rounded transition-colors">
+                            <i class="fas fa-chart-line w-4 h-4 mr-3"></i>
+                            <span class="text-sm">Cronograma</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="visualizar-documentos.html" class="nav-btn active w-full flex items-center px-4 py-2 text-left bg-green-700 rounded transition-colors">
+                            <i class="fas fa-folder w-4 h-4 mr-3"></i>
+                            <span class="text-sm">Documentos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="calendarioS.html" class="nav-btn w-full flex items-center px-4 py-2 text-left hover:bg-green-700 rounded transition-colors">
+                            <i class="fas fa-calendar-alt w-4 h-4 mr-3"></i>
+                            <span class="text-sm">Seguimiento</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Top Bar -->
+            <div class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <!-- Left side - Menu Toggle and UTN Logo -->
+                    <div class="flex items-center space-x-4">
+                        <button id="menuToggle" class="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
                         </button>
+                        <img src="../img/images.png" alt="UTN Logo" class="h-8 w-auto">
                     </div>
 
-                    <!-- Logout Button -->
-                    <button id="logoutBtn" class="btn btn-red">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Content Area -->
-        <div class="content-area">
-            <div class="container">
-                <!-- Documents List -->
-                <div class="card">
-                    <div class="card-content">
-                        <div class="filter-container">
-                            <h3 class="card-title">Mis Documentos</h3>
-                            <div class="filter-select">
-                                <select id="filterDocuments">
-                                    <option value="all">Todos los documentos</option>
-                                    <option value="carta_presentacion">Cartas de Presentación</option>
-                                    <option value="plan_trabajo">Planes de Trabajo</option>
-                                    <option value="informe_parcial">Informes Parciales</option>
-                                    <option value="informe_final">Informes Finales</option>
-                                    <option value="evaluacion">Evaluaciones</option>
-                                    <option value="otros">Otros</option>
-                                </select>
+                    <!-- Right side buttons -->
+                    <div class="flex space-x-3">
+                        <!-- Notifications Button -->
+                        <div class="relative">
+                            <button id="notificationsBtn" class="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors relative">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                                </svg>
+                                <span id="notificationBadge" class="notification-badge">8</span>
+                            </button>
+                            
+                            <!-- Notifications Dropdown -->
+                            <div id="notificationsDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                                <div class="p-4 border-b border-gray-200">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-sm font-medium">Notificaciones</h3>
+                                        <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="max-h-64 overflow-y-auto">
+                                    <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                        <div class="flex items-start space-x-3">
+                                            <div class="w-2 h-2 rounded-full mt-2 bg-blue-500"></div>
+                                            <div class="flex-1">
+                                                <h4 class="text-sm font-medium text-gray-800">Nuevos documentos</h4>
+                                                <p class="text-xs text-gray-600 mt-1">5 documentos pendientes de revisión</p>
+                                                <p class="text-xs text-gray-400 mt-1">Hace 15 min</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="table-container">
-                            <table class="table">
-                                <thead>
+
+                        <!-- Logout Button -->
+                        <button id="logoutBtn" class="flex items-center px-3 py-2 bg-red-500 text-white text-sm rounded hover:bg-red-600 transition-colors">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                            </svg>
+                            Cerrar Sesión
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div id="mainContent" class="flex-1 p-8 bg-gray-50">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Page Header -->
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            <h1 class="text-xl font-medium text-gray-800">Visualizar Documentos</h1>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="registrar-documento.html" class="px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>Nuevo Documento
+                            </a>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-blue-100 rounded-full">
+                                    <i class="fas fa-file-alt text-blue-600 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Total Documentos</p>
+                                    <p class="text-2xl font-bold text-gray-900">156</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-yellow-100 rounded-full">
+                                    <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Pendientes Revisión</p>
+                                    <p class="text-2xl font-bold text-gray-900">23</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-green-100 rounded-full">
+                                    <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Aprobados</p>
+                                    <p class="text-2xl font-bold text-gray-900">118</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-red-100 rounded-full">
+                                    <i class="fas fa-times-circle text-red-600 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-600">Rechazados</p>
+                                    <p class="text-2xl font-bold text-gray-900">15</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                        <div class="border-b border-gray-200">
+                            <nav class="-mb-px flex space-x-8 px-6">
+                                <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors tab-btn active-tab" data-tab="todos">
+                                    Todos los documentos
+                                </button>
+                                <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors tab-btn" data-tab="pendientes">
+                                    Pendientes de revisión
+                                </button>
+                                <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors tab-btn" data-tab="aprobados">
+                                    Aprobados
+                                </button>
+                                <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors tab-btn" data-tab="rechazados">
+                                    Rechazados
+                                </button>
+                            </nav>
+                        </div>
+
+                        <!-- Documents Table -->
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200" id="documentsTable">
+                                <thead class="bg-gray-50">
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Tipo</th>
-                                        <th>Estado</th>
-                                        <th>Fecha</th>
-                                        <th>Acciones</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estudiante</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody id="documentsTableBody">
-                                    <tr>
-                                        <td>
-                                            <div class="document-info">
-                                                <i class="fas fa-file-pdf"></i>
-                                                <div>
-                                                    <div class="document-name">Carta de Presentación.pdf</div>
-                                                    <div class="document-size">2.4 MB</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-blue">
-                                                Carta Presentación
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-green">
-                                                Aprobado
-                                            </span>
-                                        </td>
-                                        <td>15 may 2023</td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="action-btn view" title="Ver documento">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="action-btn download" title="Descargar">
-                                                    <i class="fas fa-download"></i>
-                                                </button>
-                                                <button class="action-btn delete" title="Eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="document-info">
-                                                <i class="fas fa-file-word"></i>
-                                                <div>
-                                                    <div class="document-name">Plan de Trabajo.docx</div>
-                                                    <div class="document-size">1.8 MB</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-purple">
-                                                Plan Trabajo
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-yellow">
-                                                Pendiente
-                                            </span>
-                                        </td>
-                                        <td>20 may 2023</td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="action-btn view" title="Ver documento">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="action-btn download" title="Descargar">
-                                                    <i class="fas fa-download"></i>
-                                                </button>
-                                                <button class="action-btn delete" title="Eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="document-info">
-                                                <i class="fas fa-file-pdf"></i>
-                                                <div>
-                                                    <div class="document-name">Informe Parcial 1.pdf</div>
-                                                    <div class="document-size">3.2 MB</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-yellow">
-                                                Informe Parcial
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-red">
-                                                Rechazado
-                                            </span>
-                                        </td>
-                                        <td>10 jun 2023</td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="action-btn view" title="Ver documento">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button class="action-btn download" title="Descargar">
-                                                    <i class="fas fa-download"></i>
-                                                </button>
-                                                <button class="action-btn delete" title="Eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <tbody class="bg-white divide-y divide-gray-200" id="documentsTableBody">
+                                    <!-- Content will be populated by JavaScript -->
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Pagination -->
+                        <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Anterior
+                                </button>
+                                <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Siguiente
+                                </button>
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        Mostrando <span class="font-medium">1</span> a <span class="font-medium">10</span> de <span class="font-medium">23</span> resultados
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+                                        <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <button class="bg-green-50 border-green-500 text-green-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</button>
+                                        <button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">2</button>
+                                        <button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">3</button>
+                                        <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Document Preview Modal -->
+    <div id="previewModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg w-full max-w-4xl mx-auto max-h-full overflow-auto">
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800" id="previewTitle">Vista Previa del Documento</h3>
+                <button id="closePreview" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6" id="previewContent">
+                <!-- Document preview content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md mx-auto">
+            <div class="flex items-center mb-4">
+                <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                </svg>
+                <h3 class="text-lg font-medium text-gray-800">Cerrar Sesión</h3>
+            </div>
+            <p class="text-gray-600 mb-6">
+                ¿Estás seguro de que deseas cerrar tu sesión? Tendrás que volver a iniciar sesión para acceder al sistema.
+            </p>
+            <div class="flex space-x-3 justify-end">
+                <button id="cancelLogout" class="px-4 py-2 text-gray-600 border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+                    Cancelar
+                </button>
+                <button id="confirmLogout" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="visualizar.js"></script>
+    <script src="shared.js"></script>
 </body>
 </html>
